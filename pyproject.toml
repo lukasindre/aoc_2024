@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "aoc-2024"
+version = "0.1.0"
+description = ""
+authors = ["Lukas <lukas.indre@upstart.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+requests = "^2.32.3"
+pydantic-settings = "^2.6.1"
+python-dotenv = "^1.0.1"
+
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.8.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
