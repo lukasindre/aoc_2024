@@ -9,4 +9,4 @@ def get_input(day: int, year: int) -> str:
         headers={"Cookie": aoc_2024.util.settings.values.AOC_SESSION},
     )
     response.raise_for_status()
-    return response.text
+    return response.text.strip()
