@@ -28,11 +28,22 @@ class Report:
 def main():
     data = get_input(2, 2024)
     total_safe = 0
+    could_be_safe = 0
     for line in data.split("\n"):
         report = Report([int(x) for x in line.split()])
         if report.is_safe():
             total_safe += 1
+        else:
+            sublists_one_less = [
+                report.line[:i] + report.line[i + 1 :] for i in range(len(report.line))
+            ]
+            for sublist in sublists_one_less:
+                report = Report(sublist)
+                if report.is_safe():
+                    could_be_safe += 1
+                    break
     print(total_safe)
+    print(total_safe + could_be_safe)
 
 
 if __name__ == "__main__":
