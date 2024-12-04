@@ -1,8 +1,15 @@
 from aoc_2024.util.get_input import get_input
+import os
 
 
 def main():
-    data = get_input({{ day }}, {{ year }})
+    if os.path.exists("aoc_2024/{{ puzzle_name }}/input.txt"):
+        with open("aoc_2024/{{ puzzle_name }}/input.txt") as f:
+            data = f.read()
+    else:
+        data = get_input({{ day }}, {{ year }})
+        with open("aoc_2024/{{ puzzle_name }}/input.txt", "w") as f:
+            f.write(data)
     print(data)
 
 
