@@ -26,7 +26,7 @@ def main(day, year, puzzle_name):
 
     context = {"year": year, "day": day, "puzzle_name": puzzle_name}
 
-    output_dir = f"aoc_2024/{puzzle_name}"
+    output_dir = f"aoc_2024/{day:02}_{puzzle_name}"
 
     for template_file in template_files:
         render_template(
