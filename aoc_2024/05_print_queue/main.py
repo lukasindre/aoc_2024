@@ -29,6 +29,9 @@ class Update:
                     self.correct_order = False
                     return
 
+    def fix_order(self, ordering_rules: list[tuple[int, int]]):
+        pass
+
 
 def main():
     if os.path.exists("aoc_2024/05_print_queue/input.txt"):
