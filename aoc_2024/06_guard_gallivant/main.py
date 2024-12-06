@@ -19,6 +19,7 @@ class Gallivant:
             ]
         )
         self.direction = next(self.steps_cycle)  # initial start as up
+        self.ARBITRARY_UPPER_BOUND_FOR_LOOP = 7500
 
     def _find_initial_position(self):
         for r, row in enumerate(self.patrol_space):
@@ -46,6 +47,8 @@ class Gallivant:
                     current_row, current_column = next_step_row, next_step_column
                     self.visits.append((current_row, current_column))
                     self.steps += 1
+                    if self.steps > self.ARBITRARY_UPPER_BOUND_FOR_LOOP:
+                        raise Exception("Fruit loops")
             else:
                 break
 
@@ -58,9 +61,25 @@ def main():
         data = get_input(6, 2024)
         with open("aoc_2024/06_guard_gallivant/input.txt", "w") as f:
             f.write(data)
-    gallivant = Gallivant(data.split("\n"))
+    patrol_space = data.split("\n")
+    gallivant = Gallivant(patrol_space)
     gallivant.gallivant()
     print(len(set(gallivant.visits)))
+    obsruction_positions_for_loops = []
+    ir, ic = gallivant.initial_position
+    for i, row in enumerate(patrol_space):
+        for j, char in enumerate(row):
+            if char != "#" and char != "^" and (i, j) != (ir - 1, ic):
+                new_patrol_space = patrol_space.copy()
+                row_list = list(new_patrol_space[i])
+                row_list[j] = "#"
+                new_patrol_space[i] = "".join(row_list)
+                gallivant = Gallivant(new_patrol_space)
+                try:
+                    gallivant.gallivant()
+                except Exception:
+                    obsruction_positions_for_loops.append((i, j))
+    print(len(set(obsruction_positions_for_loops)))
 
 
 if __name__ == "__main__":
